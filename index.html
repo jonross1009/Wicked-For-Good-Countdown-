@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wicked Movie Countdown</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at top, #0a0a0a 0%, #111 100%);
+        color: #00ff6a;
+        text-align: center;
+    }
+
+    .card {
+        background: rgba(0, 0, 0, 0.85);
+        border-radius: 20px;
+        box-shadow: 0 0 15px rgba(0, 255, 106, 0.5);
+        padding: 40px;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        border: 2px solid #00ff6a;
+    }
+
+    .countdown {
+        display: flex;
+        justify-content: space-around;
+        font-size: 3rem;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-shadow: 0 0 5px #00ff6a;
+    }
+
+    .countdown div { min-width: 60px; }
+
+    .label {
+        font-size: 0.8rem;
+        display: block;
+        margin-top: 5px;
+        color: #ffd700;
+        text-shadow: 0 0 3px #ffd700;
+    }
+
+    .message {
+        font-size: 1.2rem;
+        color: #00ff6a;
+        text-shadow: 0 0 5px #00ff6a;
+        margin-top: 15px;
+    }
+
+    .release-date {
+        font-size: 1rem;
+        color: #ffd700;
+        margin-top: 10px;
+    }
+
+    .official-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        border-radius: 10px;
+        background-color: #00ff6a;
+        color: #000;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .official-link:hover {
+        background-color: #ffd700;
+        color: #000;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Wicked Movie Countdown</h1>
+    <div class="countdown">
+        <div><span id="days">0</span><span class="label">Days</span></div>
+        <div><span id="hours">0</span><span class="label">Hours</span></div>
+        <div><span id="minutes">0</span><span class="label">Minutes</span></div>
+        <div><span id="seconds">0</span><span class="label">Seconds</span></div>
+    </div>
+    <div class="message">Get ready to experience the magic of Wicked!</div>
+    <div class="release-date">Release Date: November 21, 2025</div>
+    <a href="https://www.wickedmovie.com/" target="_blank" class="official-link">Visit Official Site</a>
+</div>
+
+<script>
+    const releaseDate = new Date('November 21, 2025 00:00:00').getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = releaseDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = days;
+        document.getElementById('hours').innerText = hours;
+        document.getElementById('minutes').innerText = minutes;
+        document.getElementById('seconds').innerText = seconds;
+
+        if (distance < 0) {
+            document.querySelector('.countdown').innerHTML = "<div>It's here! 🎉</div>";
+        }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+
+</body>
+</html>
